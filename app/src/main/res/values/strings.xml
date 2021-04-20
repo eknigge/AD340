@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">AD340_Knigge_App</string>
+    <string name="toast">Toast</string>
+    <string name="counter">Counter</string>
+    <string name="_0">0</string>
+    <string name="disney">Disney+</string>
+    <string name="live_tv">Live TV</string>
+    <string name="hulu">Hulu</string>
+    <string name="netflix">Netflix</string>
+    <string name="send">Send</string>
+    <string name="enter_data">Enter Data</string>
 </resources>

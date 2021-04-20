@@ -6,36 +6,78 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Weclome to Eric's AD340 App!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.123" />
-
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/editTextTextPersonName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="184dp"
-        android:layout_marginBottom="507dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="30dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Eric Knigge"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="@string/enter_data"
+        app:layout_constraintEnd_toStartOf="@+id/send_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="339dp"
-        android:layout_height="252dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="245dp"
-        android:text="This is my interesting bio where I tell you about my history of studying and working as a Civil Engineer. I've done that for about 10 years, and found myself wanting to optimize routine tasks we did. That got me started on self-learning for programming, and eventually lead me here."
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/send"
+        android:onClick="sendToast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="153dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/netflix_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="runNetflix"
+            android:text="@string/netflix" />
+
+        <Button
+            android:id="@+id/hulu_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="runHulu"
+            android:text="@string/hulu" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/disney_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="runDisney"
+            android:text="@string/disney" />
+
+        <Button
+            android:id="@+id/live_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="runLiveTV"
+            android:text="@string/live_tv" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
