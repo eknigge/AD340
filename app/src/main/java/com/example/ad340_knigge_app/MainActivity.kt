@@ -21,6 +21,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this , Movies::class.java)
             startActivity(intent)
         }
+
+        // Link to movie details
+        var movieDetailButton = findViewById<Button>(R.id.movie_detail_button)
+        movieDetailButton.setOnClickListener {
+            val intent = Intent(this , MovieDetail::class.java)
+            intent.putExtra("movieDetails", DataSource().getMoviesList()[0])
+            startActivity(intent)
+        }
     }
 
     fun sendToast(view: View) {

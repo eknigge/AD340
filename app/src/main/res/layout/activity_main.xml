@@ -87,10 +87,12 @@
             android:text="@string/live_tv" />
 
         <Button
-            android:id="@+id/movie_details_button"
+            android:id="@+id/movie_detail_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/movie_details" />
+            android:text="Movie Detail"
+            />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
