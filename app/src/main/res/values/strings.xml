@@ -9,4 +9,7 @@
     <string name="netflix">Netflix</string>
     <string name="send">Send</string>
     <string name="enter_data">Enter Data</string>
+    <string name="movies">Movies</string>
+    <string name="movie_details">Movie Details</string>
+    <string name="placeholder">Placeholder</string>
 </resources>

@@ -1,18 +1,26 @@
 package com.example.ad340_knigge_app
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
-    var mCount = 0;
+    var mCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        // Log.d("MainActivity", "Hello World");
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // Link to movie activity
+        var movieButton = findViewById<Button>(R.id.movies_button)
+        movieButton.setOnClickListener {
+            val intent = Intent(this , Movies::class.java)
+            startActivity(intent)
+        }
     }
 
     fun sendToast(view: View) {

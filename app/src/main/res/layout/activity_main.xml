@@ -53,6 +53,13 @@
             android:layout_height="wrap_content"
             android:onClick="runHulu"
             android:text="@string/hulu" />
+
+        <Button
+            android:id="@+id/movies_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/movies"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -78,6 +85,12 @@
             android:layout_height="wrap_content"
             android:onClick="runLiveTV"
             android:text="@string/live_tv" />
+
+        <Button
+            android:id="@+id/movie_details_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/movie_details" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
