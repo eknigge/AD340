@@ -9,7 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class MovieAdapter(
-        val movieList: Array<Array<String>>
+        val movieList: Array<Array<String>>,
+        val clickListener: (Int) -> Unit
         ): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
 
         // Item View and place within RecyclerView
@@ -39,6 +40,7 @@ class MovieAdapter(
         val itemValues = movieList[position]
         holder.title.text = itemValues[0]
         holder.year.text = itemValues[1]
+        holder.itemView.setOnClickListener{clickListener(position)}
     }
 
 }
