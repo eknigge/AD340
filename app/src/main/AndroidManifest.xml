@@ -3,6 +3,8 @@
     package="com.example.ad340_knigge_app">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,10 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AD340_Knigge_App">
+        <activity android:name=".TrafficCameras"></activity>
         <activity
             android:name=".MovieDetail"
-            android:parentActivityName=".Movies"
-        />
+            android:parentActivityName=".Movies" />
         <activity
             android:name=".Movies"
             android:parentActivityName=".MainActivity" />

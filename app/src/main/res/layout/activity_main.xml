@@ -87,10 +87,10 @@
             android:text="@string/live_tv" />
 
         <Button
-            android:id="@+id/movie_detail_button"
+            android:id="@+id/traffic_camera_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Movie Detail"
+            android:text="@string/traffic_cam"
             />
 
     </LinearLayout>

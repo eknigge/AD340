@@ -22,6 +22,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Link to traffic activity
+        var trafficButton = findViewById<Button>(R.id.traffic_camera_button)
+        trafficButton.setOnClickListener {
+            val intent = Intent(this , TrafficCameras::class.java)
+            startActivity(intent)
+        }
+
     }
 
     fun sendToast(view: View) {
