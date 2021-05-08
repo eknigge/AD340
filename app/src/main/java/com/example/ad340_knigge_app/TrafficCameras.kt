@@ -6,6 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ad340_knigge_app.Model.Camera
+import com.example.ad340_knigge_app.Model.CameraModel
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -26,7 +31,27 @@ class TrafficCameras : AppCompatActivity() {
             .create(CamApiService::class.java)
 
         val response = retrofit.getTrafficCamData()
-        recyclerView.adapter = TrafficAdapter(response)
+        val cameraArray = apiToList(response)
+        recyclerView.adapter = TrafficAdapter(cameraArray)
+    }
+
+    fun apiToList(jsonArray: JsonArray): ArrayList<CameraModel> {
+        val cameraList = ArrayList<CameraModel>()
+        val n = jsonArray.size()
+
+        for(i in 0..n){
+            val item = jsonArray[i].asJsonObject
+            val cameraData = item.getAsJsonArray("Cameras")[0].asJsonObject
+            cameraList.add(
+                CameraModel(
+                    cameraData.get("Id").asString,
+                    cameraData.get("Description").asString,
+                    cameraData.get("ImageUrl").asString,
+                    cameraData.get("Type").asString,)
+            )
+        }
+
+        return cameraList
     }
 
     fun noConnection() {

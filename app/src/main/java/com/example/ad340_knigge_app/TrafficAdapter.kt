@@ -7,10 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ad340_knigge_app.Model.Camera
+import com.example.ad340_knigge_app.Model.CameraModel
 import retrofit2.Call
 
 class TrafficAdapter(
-    val apiResponse: List <Camera>
+    val apiResponse: List <CameraModel>
 ): RecyclerView.Adapter<TrafficAdapter.TrafficViewHolder>(){
     val IMG_URL_BASE = "https://www.seattle.gov/trafficcams/images/"
 
@@ -36,8 +37,10 @@ class TrafficAdapter(
 
     // Displays data at a certain position
     override fun onBindViewHolder(holder: TrafficViewHolder, position: Int) {
-        val ImgUrl = IMG_URL_BASE + apiResponse[0].AllData[position].Cameras[0].ImageUrl
-        holder.title.text = apiResponse[0].AllData[position].Cameras[0].Description
+        holder.title.text = apiResponse[position].Description
+
+        //need to implement showing images
+        val ImgUrl = IMG_URL_BASE + apiResponse[position].ImageUrl
 
     }
 
