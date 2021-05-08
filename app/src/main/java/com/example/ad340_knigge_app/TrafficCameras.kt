@@ -4,18 +4,26 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.util.Log.DEBUG
 import android.widget.TextView
+import androidx.constraintlayout.solver.LinearSystem.DEBUG
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ad340_knigge_app.BuildConfig.DEBUG
 import com.example.ad340_knigge_app.Model.Camera
 import com.example.ad340_knigge_app.Model.CameraModel
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.squareup.picasso.BuildConfig.DEBUG
 import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class TrafficCameras : AppCompatActivity() {
     val API_URL = "https://web6.seattle.gov/Travelers/api/Map/"
+    var cameraList = ArrayList<CameraModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,14 +38,25 @@ class TrafficCameras : AppCompatActivity() {
             .build()
             .create(CamApiService::class.java)
 
-        val response = retrofit.getTrafficCamData()
-        val cameraArray = apiToList(response)
-        recyclerView.adapter = TrafficAdapter(cameraArray)
+        val request = retrofit.getTrafficCamData()
+        request.enqueue(object: Callback<JsonObject>{
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                val data = response.body()?.get("Features")!!.asJsonArray
+                cameraList = apiToList(data)
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable){
+                Log.d("Sample", t.message.toString())
+            }
+        })
+
+
+//        recyclerView.adapter = TrafficAdapter(cameraList)
     }
 
     fun apiToList(jsonArray: JsonArray): ArrayList<CameraModel> {
         val cameraList = ArrayList<CameraModel>()
-        val n = jsonArray.size()
+        val n = jsonArray.size()-1
 
         for(i in 0..n){
             val item = jsonArray[i].asJsonObject
@@ -50,7 +69,6 @@ class TrafficCameras : AppCompatActivity() {
                     cameraData.get("Type").asString,)
             )
         }
-
         return cameraList
     }
 

@@ -28,11 +28,9 @@ class TrafficAdapter(
         return TrafficViewHolder(view)
     }
 
-
     // Returns size of data list
     override fun getItemCount(): Int {
-        //placeholder value
-        return 0;
+        return apiResponse.size;
     }
 
     // Displays data at a certain position
@@ -43,7 +41,4 @@ class TrafficAdapter(
         val ImgUrl = IMG_URL_BASE + apiResponse[position].ImageUrl
 
     }
-
-
-
 }
