@@ -9,9 +9,9 @@ tools:context=".Movies">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_traffic"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layoutManager="LinearLayoutManager"
-        />
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/text_traffic_no_connection"
