@@ -20,7 +20,6 @@ class Movies : AppCompatActivity() {
         // Get a support ActionBar corresponding to this toolbar and enable the Up button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         recyclerView.adapter = MovieAdapter(movieData) { position: Int -> onItemClick(position) }
     }

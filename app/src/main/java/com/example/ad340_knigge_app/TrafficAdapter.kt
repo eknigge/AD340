@@ -1,5 +1,6 @@
 package com.example.ad340_knigge_app
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ad340_knigge_app.Model.Camera
 import com.example.ad340_knigge_app.Model.CameraModel
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 
 class TrafficAdapter(
@@ -24,7 +26,7 @@ class TrafficAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrafficViewHolder{
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.movie_item, parent, false)
+            .inflate(R.layout.traffic_cam_item, parent, false)
         return TrafficViewHolder(view)
     }
 
@@ -36,9 +38,7 @@ class TrafficAdapter(
     // Displays data at a certain position
     override fun onBindViewHolder(holder: TrafficViewHolder, position: Int) {
         holder.title.text = apiResponse[position].Description
-
-        //need to implement showing images
         val ImgUrl = IMG_URL_BASE + apiResponse[position].ImageUrl
-
+        Picasso.get().load(ImgUrl).into(holder.img)
     }
 }

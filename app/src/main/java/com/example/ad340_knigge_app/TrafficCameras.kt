@@ -29,6 +29,12 @@ class TrafficCameras : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_traffic_cameras)
         checkNetworkStatus()
+
+        // Set action bar title
+        supportActionBar?.title = "Traffic Cameras"
+
+        // Get a support ActionBar corresponding to this toolbar and enable the Up button
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     fun getAPIData(recyclerView: RecyclerView){
@@ -43,15 +49,17 @@ class TrafficCameras : AppCompatActivity() {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 val data = response.body()?.get("Features")!!.asJsonArray
                 cameraList = apiToList(data)
+                recyclerView.adapter = TrafficAdapter(cameraList)
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable){
-                Log.d("Sample", t.message.toString())
+                Log.d("Error", "Failed API Response")
+                val noConnectionText = findViewById<TextView>(R.id.text_traffic_no_connection)
+                noConnectionText.text = ("No Connection. Please check your internet connection and try again")
             }
         })
 
 
-//        recyclerView.adapter = TrafficAdapter(cameraList)
     }
 
     fun apiToList(jsonArray: JsonArray): ArrayList<CameraModel> {
