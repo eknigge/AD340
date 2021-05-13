@@ -1,6 +1,7 @@
 package com.example.ad340_knigge_app
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 

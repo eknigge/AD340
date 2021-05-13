@@ -18,7 +18,6 @@ class MovieAdapter(
                 RecyclerView.ViewHolder(itemView) {
             val title: TextView = itemView.findViewById(R.id.movie_title)
             val year: TextView = itemView.findViewById(R.id.movie_year)
-            var currentMovie: String? = null
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {

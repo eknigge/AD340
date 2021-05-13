@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AD340_Knigge_App">
         <activity
+            android:name=".MovieDetail"
+            android:parentActivityName=".Movies"/>
+        <activity
             android:name=".TrafficCameras"
             android:parentActivityName=".MainActivity" />
         <activity
