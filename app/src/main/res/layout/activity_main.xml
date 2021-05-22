@@ -60,6 +60,13 @@
             android:layout_height="wrap_content"
             android:text="@string/movies"
             />
+
+        <Button
+            android:id="@+id/camera_map_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/map_cam"
+            />
     </LinearLayout>
 
     <LinearLayout

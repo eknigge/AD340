@@ -3,6 +3,7 @@ package com.example.ad340_knigge_app
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -26,6 +27,14 @@ class MainActivity : AppCompatActivity() {
         var trafficButton = findViewById<Button>(R.id.traffic_camera_button)
         trafficButton.setOnClickListener {
             val intent = Intent(this , TrafficCameras::class.java)
+            startActivity(intent)
+        }
+
+        // Link to Camera Map activity
+        var cameraMapButton = findViewById<Button>(R.id.camera_map_button)
+        cameraMapButton.setOnClickListener{
+            Log.d("LOG", "Progress item")
+            val intent = Intent(this , CameraMap::class.java)
             startActivity(intent)
         }
 

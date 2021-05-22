@@ -29,4 +29,9 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="no_connection">No Connection, please get your internet connection and try again</string>
     <string name="traffic_cam">Traffic Cam</string>
+    <string name="map_cam">Map Cam</string>
+    <string name="title_activity_map_cameras">MapCameras</string>
+    <string name="title_activity_camera_map">CameraMap</string>
+    <string name="title_activity_t_e_m_p">Map</string>
+    <string name="title_activity_map_camera">Map</string>
 </resources>
