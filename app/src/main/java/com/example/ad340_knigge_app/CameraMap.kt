@@ -111,20 +111,6 @@ internal class CameraMap: AppCompatActivity(), OnMapReadyCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    fun centerMapOnUser(location: Location){
-       mMap.addMarker(
-           MarkerOptions()
-               .position(LatLng(location.latitude, location.longitude))
-               .title("My Current Location")
-               .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-       )
-
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(12f))
-        mMap.moveCamera(
-            CameraUpdateFactory.newLatLng(LatLng(location.latitude, location.longitude))
-        )
-    }
-
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         mMap.moveCamera(CameraUpdateFactory.zoomTo(12f))
@@ -133,7 +119,6 @@ internal class CameraMap: AppCompatActivity(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLng(SEATTLE))
 
         getCameraData()
-
     }
 
     fun getCameraData(){
