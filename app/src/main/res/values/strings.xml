@@ -7,8 +7,8 @@
     <string name="live_tv">Live TV</string>
     <string name="hulu">Hulu</string>
     <string name="netflix">Netflix</string>
-    <string name="send">Send</string>
-    <string name="enter_data">Enter Data</string>
+    <string name="login_button">Login</string>
+    <string name="user_name">Username</string>
     <string name="movies">Movies</string>
     <string name="movie_details">Movie Details</string>
     <string name="placeholder">Placeholder</string>

@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/username_input"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginStart="30dp"
@@ -15,18 +15,43 @@
         android:layout_marginEnd="30dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/enter_data"
-        app:layout_constraintEnd_toStartOf="@+id/send_button"
+        android:text="@string/user_name"
+        app:layout_constraintEnd_toStartOf="@+id/login_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/email_input"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="160dp"
+        android:text="Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username_input" />
+
+    <EditText
+        android:id="@+id/password_input"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="160dp"
+        android:text="Password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_input" />
+
     <Button
-        android:id="@+id/send_button"
+        android:id="@+id/login_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="30dp"
-        android:text="@string/send"
+        android:text="@string/login_button"
         android:onClick="sendToast"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +59,7 @@
     <LinearLayout
         android:layout_width="153dp"
         android:layout_height="0dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="250dp"
         android:layout_marginEnd="30dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout"
@@ -73,7 +98,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="150dp"
         android:layout_height="0dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="250dp"
         android:layout_marginEnd="30dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
