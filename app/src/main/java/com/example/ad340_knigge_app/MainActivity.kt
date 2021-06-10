@@ -1,15 +1,19 @@
 package com.example.ad340_knigge_app
 
+import android.R.attr.password
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+
 
 class MainActivity : AppCompatActivity() {
     var mCount = 0
@@ -47,14 +51,15 @@ class MainActivity : AppCompatActivity() {
         loginButton.setOnClickListener{
 
             // initialize input variables
-            inputEmail = findViewById(R.id.email_input)
-            inputPassword = findViewById(R.id.password_input)
-            inputUsername = findViewById(R.id.username_input)
+            inputEmail = findViewById<EditText>(R.id.email_input).text.toString()
+            inputPassword = findViewById<EditText>(R.id.password_input).text.toString()
+            inputUsername = findViewById<EditText>(R.id.username_input).text.toString()
 
             // validate inputs
             if(areInputsValid()){
-                // if valid run login
-                signIn()
+                FirebaseApp.initializeApp(this)
+                altsignIn()
+//                signIn()
             }
         }
 
@@ -68,11 +73,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun areInputsValid(): boolean {
+    fun areInputsValid(): Boolean {
         val email = isEmailValid(inputEmail.toString())
-        val username = inputUsername.toString().isEmpty()
-        val password = inputPassword.toString().isEmpty()
-        return email && username && password
+        val username = !(inputUsername.toString().isEmpty())
+        val password = !(inputPassword.toString().isEmpty())
+        return (email && username && password)
     }
 
     fun sendToast(view: View) {
@@ -95,9 +100,9 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Watch Live TV", Toast.LENGTH_LONG).show()
     }
 
-    fun saveToSharedPreferences(email: String, username:String, password:String){
+    fun saveToSharedPreferences(email: String, username: String, password: String){
         val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
-        with (sharedPref.edit()){
+        with(sharedPref.edit()){
             putString("email", email)
             putString("username", username)
             putString("password", password)
@@ -114,51 +119,86 @@ class MainActivity : AppCompatActivity() {
         return sharedPrefData
     }
 
-    fun signIn(){
+    fun signIn() {
         Log.d("FIREBASE", "signIn")
+        val mAuth = FirebaseAuth.getInstance();
+        mAuth.signInWithEmailAndPassword(
+            inputEmail,
+            inputPassword
+        )
+                .addOnCompleteListener(
+                    this
+                ) { task ->
+                    Log.d("FIREBASE", "signIn:onComplete:" + task.isSuccessful)
+                    if (task.isSuccessful) {
+                        saveToSharedPreferences(
+                            inputEmail,
+                            inputUsername,
+                            inputPassword
+                        )
+                        // update profile
+                        val user = FirebaseAuth.getInstance().currentUser
+                        val profileUpdates = UserProfileChangeRequest.Builder()
+                                .setDisplayName(inputUsername.toString())
+                                .build()
+                        user!!.updateProfile(profileUpdates)
+                                .addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        Log.d("FIREBASE", "User profile updated.")
+                                        // Go to FirebaseActivity
+                                        startActivity(Intent(this, FirebaseActivity::class.java))
+                                    }
+                                }
+                    } else {
+                        Log.d("FIREBASE", "sign-in failed")
+                    }
+                }
+    }
+
+
+    private fun altsignIn() {
+        Log.d("FIREBASE", "signIn")
+
+        // 1 - validate display name, email, and password entries
+
 
         // 2 - save valid entries to shared preferences
 
 
         // 3 - sign into Firebase
-        val mAuth = FirebaseAuth.getInstance();
-        mAuth.signInWithEmailAndPassword(inputEmail.toString(), inputPassword.toString())
-                .addOnCompleteListener(this,
-
-
-                        new OnCompleteListener < AuthResult >() {
-
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("FIREBASE", "signIn:onComplete:" + task.isSuccessful())
-
-                        if (task.isSuccessful()) {
-                            // update profile. displayname is the value entered in UI
-                            FirebaseUser user = FirebaseAuth . getInstance ().getCurrentUser()
-                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(displayname)
-                                    .build()
-
-                            user.updateProfile(profileUpdates)
-                                    .addOnCompleteListener(new OnCompleteListener < Void >() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Log.d("FIREBASE", "User profile updated.")
-                                                // Go to FirebaseActivity
-                                                startActivity(new Intent MainActivity.this, FirebaseActivity.class))
-                                            }
-                                        }
-                                    })
-
-                        } else {
-                            Log.d("FIREBASE", "sign-in failed")
-
-                            Toast.makeText(MainActivity.this, "Sign In Failed",
-                                    Toast.LENGTH_SHORT).show()
+        val mAuth = FirebaseAuth.getInstance()
+        mAuth.signInWithEmailAndPassword(inputEmail, inputPassword)
+            .addOnCompleteListener(
+                this
+            ) { task ->
+                Log.d("FIREBASE", "signIn:onComplete:" + task.isSuccessful)
+                if (task.isSuccessful) {
+                    // update profile. displayname is the value entered in UI
+                    val user = FirebaseAuth.getInstance().currentUser
+                    val profileUpdates = UserProfileChangeRequest.Builder()
+                        .setDisplayName(inputUsername)
+                        .build()
+                    user!!.updateProfile(profileUpdates)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Log.d("FIREBASE", "User profile updated.")
+                                // Go to FirebaseActivity
+                                startActivity(
+                                    Intent(
+                                        this@MainActivity,
+                                        FirebaseActivity::class.java
+                                    )
+                                )
+                            }
                         }
-                    }
-                })
+                } else {
+                    Log.d("FIREBASE", "sign-in failed")
+                    Toast.makeText(
+                        this@MainActivity, "Sign In Failed",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
     }
 
 
