@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "918571089084",
+    "firebase_url": "https://ad340-24b27.firebaseio.com",
+    "project_id": "ad340-24b27",
+    "storage_bucket": "ad340-24b27.appspot.com",
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126670761298:android:294e4026c94ab4bbe55e8b",
+        "android_client_info": {
+          "package_name": "com.example.ad340_knigge_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126670761298-vqm3pp4kmj8shod7jr4cq5cb8645ri4q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDm0hHg80xhpBPVo5Jb__WEYcz74utPuxU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126670761298-vqm3pp4kmj8shod7jr4cq5cb8645ri4q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

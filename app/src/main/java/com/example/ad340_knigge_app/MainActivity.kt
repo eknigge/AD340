@@ -13,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +27,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+       // Initialize Firebase
+        FirebaseApp.initializeApp(this)
 
         // Link to movie activity
         var movieButton = findViewById<Button>(R.id.movies_button)
@@ -47,6 +53,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Read values from shared preference
+        var savedPref = getSharedPreferenceValues()
+        findViewById<EditText>(R.id.email_input).setText(savedPref[0])
+        findViewById<EditText>(R.id.email_input).setText(savedPref[1])
+        findViewById<EditText>(R.id.email_input).setText(savedPref[2])
+
+
         var loginButton = findViewById<Button>(R.id.login_button)
         loginButton.setOnClickListener{
 
@@ -57,7 +70,6 @@ class MainActivity : AppCompatActivity() {
 
             // validate inputs
             if(areInputsValid()){
-                FirebaseApp.initializeApp(this)
                 altsignIn()
 //                signIn()
             }
@@ -160,13 +172,19 @@ class MainActivity : AppCompatActivity() {
         Log.d("FIREBASE", "signIn")
 
         // 1 - validate display name, email, and password entries
+        if(areInputsValid()) saveToSharedPreferences(inputEmail, inputUsername, inputPassword)
 
 
         // 2 - save valid entries to shared preferences
 
 
         // 3 - sign into Firebase
-        val mAuth = FirebaseAuth.getInstance()
+        if(!FirebaseApp.getApps(this).isEmpty()){
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+            FirebaseApp.initializeApp(this)
+        }
+
+        val mAuth = Firebase.auth
         mAuth.signInWithEmailAndPassword(inputEmail, inputPassword)
             .addOnCompleteListener(
                 this

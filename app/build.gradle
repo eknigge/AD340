@@ -4,6 +4,8 @@ plugins {
     id 'com.google.secrets_gradle_plugin' version '0.5'
 }
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
