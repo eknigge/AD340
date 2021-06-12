@@ -54,10 +54,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Read values from shared preference
-        var savedPref = getSharedPreferenceValues()
-        findViewById<EditText>(R.id.email_input).setText(savedPref[0])
-        findViewById<EditText>(R.id.email_input).setText(savedPref[1])
-        findViewById<EditText>(R.id.email_input).setText(savedPref[2])
+//        var savedPref = getSharedPreferenceValues()
+//        findViewById<EditText>(R.id.email_input).setText(savedPref[0])
+//        findViewById<EditText>(R.id.username_input).setText(savedPref[1])
+//        findViewById<EditText>(R.id.password_input).setText(savedPref[2])
 
 
         var loginButton = findViewById<Button>(R.id.login_button)
@@ -184,6 +184,8 @@ class MainActivity : AppCompatActivity() {
             FirebaseApp.initializeApp(this)
         }
 
+        Log.d("LOGIN EMAIL", inputEmail)
+        Log.d("LOGIN PASSWORD", inputPassword)
         val mAuth = Firebase.auth
         mAuth.signInWithEmailAndPassword(inputEmail, inputPassword)
             .addOnCompleteListener(
