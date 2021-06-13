@@ -134,6 +134,8 @@ class MainActivity : AppCompatActivity() {
     fun signIn() {
         Log.d("FIREBASE", "signIn")
         val mAuth = FirebaseAuth.getInstance();
+        // email: ericknigge@gmail.com
+        // password: pAhFBVVN
         mAuth.signInWithEmailAndPassword(
             inputEmail,
             inputPassword
