@@ -173,6 +173,7 @@ class MainActivity : AppCompatActivity() {
 
         // 1 - validate display name, email, and password entries
         if(areInputsValid()) saveToSharedPreferences(inputEmail, inputUsername, inputPassword)
+        Log.d("Are inputs valid: ", areInputsValid().toString())
 
 
         // 2 - save valid entries to shared preferences
