@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -54,24 +55,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Read values from shared preference
-//        var savedPref = getSharedPreferenceValues()
-//        findViewById<EditText>(R.id.email_input).setText(savedPref[0])
-//        findViewById<EditText>(R.id.username_input).setText(savedPref[1])
-//        findViewById<EditText>(R.id.password_input).setText(savedPref[2])
+        var savedPref = getSharedPreferenceValues()
+        findViewById<EditText>(R.id.email_input).setText(savedPref[0])
+        findViewById<EditText>(R.id.username_input).setText(savedPref[1])
+        findViewById<EditText>(R.id.password_input).setText(savedPref[2])
 
 
         var loginButton = findViewById<Button>(R.id.login_button)
         loginButton.setOnClickListener{
 
-            // initialize input variables
             inputEmail = findViewById<EditText>(R.id.email_input).text.toString()
             inputPassword = findViewById<EditText>(R.id.password_input).text.toString()
             inputUsername = findViewById<EditText>(R.id.username_input).text.toString()
 
             // validate inputs
             if(areInputsValid()){
-                altsignIn()
-//                signIn()
+                signIn()
             }
         }
 
@@ -134,8 +133,6 @@ class MainActivity : AppCompatActivity() {
     fun signIn() {
         Log.d("FIREBASE", "signIn")
         val mAuth = FirebaseAuth.getInstance();
-        // email: ericknigge@gmail.com
-        // password: pAhFBVVN
         mAuth.signInWithEmailAndPassword(
             inputEmail,
             inputPassword
@@ -153,7 +150,7 @@ class MainActivity : AppCompatActivity() {
                         // update profile
                         val user = FirebaseAuth.getInstance().currentUser
                         val profileUpdates = UserProfileChangeRequest.Builder()
-                                .setDisplayName(inputUsername.toString())
+                                .setDisplayName(inputUsername)
                                 .build()
                         user!!.updateProfile(profileUpdates)
                                 .addOnCompleteListener { task ->
@@ -169,60 +166,6 @@ class MainActivity : AppCompatActivity() {
                 }
     }
 
-
-    private fun altsignIn() {
-        Log.d("FIREBASE", "signIn")
-
-        // 1 - validate display name, email, and password entries
-        if(areInputsValid()) saveToSharedPreferences(inputEmail, inputUsername, inputPassword)
-        Log.d("Are inputs valid: ", areInputsValid().toString())
-
-
-        // 2 - save valid entries to shared preferences
-
-
-        // 3 - sign into Firebase
-        if(!FirebaseApp.getApps(this).isEmpty()){
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true)
-            FirebaseApp.initializeApp(this)
-        }
-
-        Log.d("LOGIN EMAIL", inputEmail)
-        Log.d("LOGIN PASSWORD", inputPassword)
-        val mAuth = Firebase.auth
-        mAuth.signInWithEmailAndPassword(inputEmail, inputPassword)
-            .addOnCompleteListener(
-                this
-            ) { task ->
-                Log.d("FIREBASE", "signIn:onComplete:" + task.isSuccessful)
-                if (task.isSuccessful) {
-                    // update profile. displayname is the value entered in UI
-                    val user = FirebaseAuth.getInstance().currentUser
-                    val profileUpdates = UserProfileChangeRequest.Builder()
-                        .setDisplayName(inputUsername)
-                        .build()
-                    user!!.updateProfile(profileUpdates)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                Log.d("FIREBASE", "User profile updated.")
-                                // Go to FirebaseActivity
-                                startActivity(
-                                    Intent(
-                                        this@MainActivity,
-                                        FirebaseActivity::class.java
-                                    )
-                                )
-                            }
-                        }
-                } else {
-                    Log.d("FIREBASE", "sign-in failed")
-                    Toast.makeText(
-                        this@MainActivity, "Sign In Failed",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-    }
 
 
 }
