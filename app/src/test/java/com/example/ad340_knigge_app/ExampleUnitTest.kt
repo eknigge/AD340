@@ -1,4 +1,4 @@
-package com.example.ad340_knigge_app
+package com.newapp.ad340_knigge_app
 
 import org.junit.Test
 

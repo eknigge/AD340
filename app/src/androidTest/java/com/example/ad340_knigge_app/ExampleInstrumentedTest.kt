@@ -1,4 +1,4 @@
-package com.example.ad340_knigge_app
+package com.newapp.ad340_knigge_app
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
